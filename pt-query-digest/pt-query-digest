@@ -6,6 +6,7 @@
 
 use strict;
 use warnings FATAL => 'all';
+use Encode; # return decode_utf8  in line 8188
 
 # This tool is "fat-packed": most of its dependent modules are embedded
 # in this file.  Setting %INC to this file for each module makes Perl aware
@@ -8185,7 +8186,7 @@ override query_report => sub {
    };
    my $json = $self->encode_json($data);
    $json .= "\n" unless $json =~ /\n\Z/;
-   return $json;
+   return Encode::decode_utf8($json);  # return $json;
 };
 
 no Lmo;
