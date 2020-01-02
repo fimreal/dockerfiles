@@ -26,3 +26,7 @@ docker run -d --name sftpserver -v $PWD:/sftproot/$PWD  -p 2222:22 epurs/sftpser
 REPORTFILE=$(mktemp -u report.XXXXXX)
 docker run -v $PWD/slowlog:/slowlog epurs/sftpserver:base --report /slowlog > $REPORTFILE
 ```
+
+#### htpasswd
+生成账号密码 hash
+docker run --rm epurs/htpasswd <username> <password>

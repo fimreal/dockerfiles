@@ -101,3 +101,27 @@ spec:
           path: /opt/cos/res
 # ...
 ```
+---
+
+附 systemd 挂载 cosfs 配置文件模板
+
+需要修改并确认 bucket 名字`test-1256163609`、地域`beijing`以及挂载点`/mnt` 是否正确
+
+```
+[Unit]
+Description=Mount QCloud COS Bucket
+After=network.target
+
+[Mount]
+What=cosfs#test-1256163609
+Where=/mnt
+Type=fuse
+Options=_netdev,allow_other,url=http://cos.ap-beijing.myqcloud.com,dbglevel=info
+```
+
+注意⚠️：
+密码文件需要放在 `/etc/passwd-cosfs`、`~/.passwd-cosfs`，权限应为 600 。
+系统需要安装 fuse 。腾讯云文档中提示 2.9.4 (CentOS7 yum repo 版本为 2.9.2)： libfuse 在低于 2.9.4 版本的情况下可能会导致 COSFS 进程异常退出。此时，建议您参见 [COSFS 工具 文档](https://cloud.tencent.com/document/product/436/6883#.E5.AE.89.E8.A3.85.E5.92.8C.E4.BD.BF.E7.94.A8)更新 fuse 版本或安装最新版本的 COSFS。
+
+https://public-yum.oracle.com/repo/OracleLinux/OL7/UEKR4/x86_64/index.html
+
