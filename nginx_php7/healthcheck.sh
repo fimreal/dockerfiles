@@ -1,4 +1,4 @@
 # healthcheck file
 # e.g.
-pgrep php &>dev/null || php-fpm7 &
-curl -fs -I http://${DOMAIN_NAME:-localhost}/ || exit 1
+curl -fs -I http://127.0.0.1 -H "host: ${DOMAIN_NAME:-localhost}" || exit 1
+pgrep -a php || exit 1
