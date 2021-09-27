@@ -1,0 +1,7 @@
+FROM golang:alpine AS build
+RUN go get github.com/sorenisanerd/gotty
+
+FROM quay.io/derailed/k9s
+COPY --from=build /go/bin/gotty /sbin/gotty
+ENTRYPOINT []
+CMD ["/sbin/gotty","-w","--permit-arguments","-p","8080","/bin/k9s"]
