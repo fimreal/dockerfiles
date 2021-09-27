@@ -1,4 +1,4 @@
-name: caddy-docker
+name: push-to-dockerhub
 
 on:
   push:
