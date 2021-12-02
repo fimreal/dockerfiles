@@ -7,7 +7,7 @@ ENV TZ="Asia/Shanghai"
 ENV DOMAIN_NAME="localhost"
 
 # Apk mirrors proxy in China
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 # RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 
 RUN apk add --no-cache php7-fpm php7-pdo_mysql php7-tokenizer \
@@ -18,6 +18,9 @@ RUN apk add --no-cache php7-fpm php7-pdo_mysql php7-tokenizer \
     php7-intl php7-bcmath php7-dom php7-mbstring php7-xmlreader \
     curl openssl tzdata &&\
     sed -i 's/expose_php = On/expose_php = Off/g' /etc/php7/php.ini   # hide php version
+    
+RUN sed -i sed '$a include /etc/nginx/conf.d/global/*.conf;' /usr/local/openresty/nginx/conf/nginx.conf && mkdir /etc/nginx/conf.d/global &&\
+    sed -i sed '$a include /etc/nginx/conf.d/stream/*.conf;' /usr/local/openresty/nginx/conf/nginx.conf && mkdir /etc/nginx/conf.d/stream
 
 ADD . /
 
