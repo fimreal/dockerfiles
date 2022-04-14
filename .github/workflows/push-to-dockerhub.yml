@@ -31,3 +31,10 @@ jobs:
           context: k9s-with-gotty/
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/k9s-with-gotty:latest
+      -
+        name: Build and push for mycat
+        uses: docker/build-push-action@v2
+        with:
+          context: mycat
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/mycat:latest
