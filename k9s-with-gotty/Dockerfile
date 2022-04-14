@@ -1,5 +1,5 @@
 FROM golang:alpine AS build
-RUN go install github.com/sorenisanerd/gotty
+RUN go install github.com/sorenisanerd/gotty@latest
 
 FROM quay.io/derailed/k9s
 COPY --from=build /go/bin/gotty /sbin/gotty
