@@ -50,3 +50,9 @@ jobs:
           context: webproc/example/singlefile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/webproc:singlefile
+      - name: Build and push for subconverter
+        uses: docker/build-push-action@v2
+        with:
+          context: subconverter
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/subconverter:latest
