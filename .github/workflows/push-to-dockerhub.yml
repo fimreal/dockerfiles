@@ -38,3 +38,15 @@ jobs:
           context: mycat
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/mycat:latest
+      - name: Build and push for derper
+        uses: docker/build-push-action@v2
+        with:
+          context: derper
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/derper:latest
+      - name: Build and push for webproc:singlefile
+        uses: docker/build-push-action@v2
+        with:
+          context: webproc/example/singlefile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/webproc:singlefile
