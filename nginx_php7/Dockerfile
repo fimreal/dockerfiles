@@ -19,12 +19,12 @@ RUN apk add --no-cache php7-fpm php7-pdo_mysql php7-tokenizer \
     curl openssl tzdata &&\
     sed -i 's/expose_php = On/expose_php = Off/g' /etc/php7/php.ini   # hide php version
     
-RUN sed -i sed '$a include /etc/nginx/conf.d/global/*.conf;' /usr/local/openresty/nginx/conf/nginx.conf && mkdir /etc/nginx/conf.d/global &&\
-    sed -i sed '$a include /etc/nginx/conf.d/stream/*.conf;' /usr/local/openresty/nginx/conf/nginx.conf && mkdir /etc/nginx/conf.d/stream
+RUN sed -i '$a include /etc/nginx/global/*.conf;' /usr/local/openresty/nginx/conf/nginx.conf && mkdir /etc/nginx/global &&\
+    sed -i '$a include /etc/nginx/stream/*.conf;' /usr/local/openresty/nginx/conf/nginx.conf && mkdir /etc/nginx/stream
 
 ADD . /
 
-VOLUME ["/wwwroot","/etc/nginx/conf.d"]
+VOLUME ["/wwwroot","/etc/nginx"]
 
 HEALTHCHECK  --interval=20s --timeout=3s \
     CMD /healthcheck.sh
