@@ -22,12 +22,6 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
 
-      - name: Build and push for alpine
-        uses: docker/build-push-action@v2
-        with:
-          context: alpine/
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/alpine:latest
       - name: Build and push for k9s-with-gotty
         uses: docker/build-push-action@v2
         with:
@@ -70,3 +64,9 @@ jobs:
           context: fcct-online/
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/fcct-online:latest
+      - name: Build and push for alpine
+        uses: docker/build-push-action@v2
+        with:
+          context: alpine/
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/alpine:latest
