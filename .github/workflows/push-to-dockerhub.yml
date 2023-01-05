@@ -52,15 +52,15 @@ jobs:
           context: subconverter/
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/subconverter:latest
-      - name: Build and push for pg_rman
-        uses: docker/build-push-action@v2
-        with:
-          context: pg_rman/
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/pg_rman:latest
+    # - name: Build and push for pg_rman
+    #   uses: docker/build-push-action@v2
+    #   with:
+    #     context: pg_rman/
+    #     push: true
+    #     tags: ${{ secrets.DOCKERHUB_USERNAME }}/pg_rman:latest
       - name: Build and push for fcct-online
         uses: docker/build-push-action@v2
         with:
-          context: fcct-online/
+          context: fcct-online
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/fcct-online:latest
