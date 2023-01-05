@@ -9,67 +9,63 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v2
-      -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-      -
-        name: Login to DockerHub
-        uses: docker/login-action@v1
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+
       - name: Build and push for alpine
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: alpine
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/alpine:latest
-      -
-        name: Build and push for k9s-with-gotty
-        uses: docker/build-push-action@v2
+      - name: Build and push for k9s-with-gotty
+        uses: docker/build-push-action@v3
         with:
           context: k9s-with-gotty/
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/k9s-with-gotty:latest
-      -
-        name: Build and push for mycat
-        uses: docker/build-push-action@v2
+      - name: Build and push for mycat
+        uses: docker/build-push-action@v3
         with:
           context: mycat
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/mycat:latest
       - name: Build and push for derper
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: derper
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/derper:latest
       - name: Build and push for webproc:singlefile
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: webproc/example/singlefile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/webproc:singlefile
       - name: Build and push for subconverter
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: subconverter
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/subconverter:latest
       - name: Build and push for pg_rman
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: pg_rman
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/pg_rman:latest
       - name: Build and push for fcct-online
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: fcct-online
           push: true
