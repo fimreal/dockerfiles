@@ -64,3 +64,9 @@ jobs:
           context: fcct-online
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/fcct-online:latest
+      - name: Build and push for osfs
+        uses: docker/build-push-action@v2
+        with:
+          context: osfs
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/osfs:latest
