@@ -8,7 +8,7 @@ CMD ["/usr/local/bin/supervisord"]
 ENV TZ="Asia/Shanghai"
 
 # Apk mirrors proxy in China
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
 RUN apk add --no-cache php81-fpm php81-pdo_mysql php81-tokenizer \
     php81-xml php81-pdo php81-phar php81-openssl php81-pdo_pgsql\
