@@ -70,3 +70,9 @@ jobs:
           context: osfs
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/osfs:latest
+      - name: Build and push for php8
+        uses: docker/build-push-action@v2
+        with:
+          context: nginx-php8
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/nginx-php8:latest
