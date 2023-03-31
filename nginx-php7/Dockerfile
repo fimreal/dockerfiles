@@ -20,7 +20,7 @@ RUN apk add --no-cache php7-fpm php7-pdo_mysql php7-tokenizer \
     php7-curl php7-opcache php7-ctype php7-apcu \
     php7-intl php7-bcmath php7-dom php7-mbstring php7-xmlreader \
     curl openssl tzdata &&\
-    sed -i 's/expose_php = On/expose_php = Off/g;s/post_max_size = 8M/post_max_size = 0/g;s/upload_max_filesize = 2M/upload_max_filesize = 5G/g' /etc/php81/php.ini 
+    sed -i 's/expose_php = On/expose_php = Off/g;s/post_max_size = 8M/post_max_size = 0/g;s/upload_max_filesize = 2M/upload_max_filesize = 5G/g' /etc/php7/php.ini 
 
 VOLUME ["/wwwroot"]
 
