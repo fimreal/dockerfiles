@@ -28,48 +28,53 @@ jobs:
           context: k9s-with-gotty/
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/k9s-with-gotty:latest
-    # - name: Build and push for mycat
-    #   uses: docker/build-push-action@v2
-    #   with:
-    #     context: mycat/
-    #     push: true
-    #     tags: ${{ secrets.DOCKERHUB_USERNAME }}/mycat:latest
+
       - name: Build and push for derper
         uses: docker/build-push-action@v2
         with:
           context: derper/
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/derper:latest
-      - name: Build and push for webproc:singlefile
-        uses: docker/build-push-action@v2
-        with:
-          context: webproc/example/singlefile
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/webproc:singlefile
+
+      # - name: Build and push for webproc:singlefile
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     context: webproc/example/singlefile
+      #     push: true
+      #     tags: ${{ secrets.DOCKERHUB_USERNAME }}/webproc:singlefile
+
       - name: Build and push for subconverter
         uses: docker/build-push-action@v2
         with:
           context: subconverter/
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/subconverter:latest
-    # - name: Build and push for pg_rman
-    #   uses: docker/build-push-action@v2
-    #   with:
-    #     context: pg_rman/
-    #     push: true
-    #     tags: ${{ secrets.DOCKERHUB_USERNAME }}/pg_rman:latest
+
       - name: Build and push for fcct-online
         uses: docker/build-push-action@v2
         with:
           context: fcct-online
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/fcct-online:latest
+
+      - name: Build and push for hishtory
+        uses: docker/build-push-action@v2
+        with:
+          platforms: linux/amd64,linux/arm64
+          context: hishtory
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/hishtory:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/hishtory:ghaction
+
+
       - name: Build and push for osfs
         uses: docker/build-push-action@v2
         with:
           context: osfs
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/osfs:latest
+
       - name: Build and push for php8
         uses: docker/build-push-action@v2
         with:
@@ -78,6 +83,7 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/nginx-php:8.1
+
       - name: Build and push for php7
         uses: docker/build-push-action@v2
         with:
