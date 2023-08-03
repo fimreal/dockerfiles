@@ -32,6 +32,7 @@ jobs:
       - name: Build and push for derper
         uses: docker/build-push-action@v2
         with:
+          platforms: linux/amd64,linux/arm64
           context: derper/
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/derper:latest
@@ -65,7 +66,6 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/hishtory:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/hishtory:ghaction
 
       - name: Build and push for registry-ui
         uses: docker/build-push-action@v2
