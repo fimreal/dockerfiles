@@ -1,4 +1,4 @@
-FROM golang:1.20-alpine as builder
+FROM golang:alpine as builder
 # ENV GOPROXY=https://goproxy.cn,direct
 RUN go install tailscale.com/cmd/derper@latest
 
