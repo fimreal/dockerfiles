@@ -1,0 +1,33 @@
+name: Build pt-query-digest
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'pt-query-digest/**'
+      - '.github/workflows/pt-query-digest.yml'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push for pt-query-digest
+        uses: docker/build-push-action@v2
+        with:
+          platforms: linux/amd64,linux/arm64
+          context: pt-query-digest/
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/pt-query-digest:latest
+        continue-on-error: true

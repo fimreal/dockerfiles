@@ -1,0 +1,32 @@
+name: Build nginx-php8
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'nginx-php8/**'
+      - '.github/workflows/nginx-php8.yml'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push for nginx-php8
+        uses: docker/build-push-action@v2
+        with:
+          context: nginx-php8/
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/nginx-php:8.1
+        continue-on-error: true

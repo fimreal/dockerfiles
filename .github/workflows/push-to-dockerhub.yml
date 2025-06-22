@@ -1,8 +1,11 @@
-name: push-to-dockerhub
+name: push-to-dockerhub (DISABLED)
 
+# 此 workflow 已被拆分为多个单独的 workflow 文件
+# 如需启用，请取消下面的注释并删除 tags-only 触发条件
 on:
   push:
-    branches: [ master ]
+    tags:
+      - 'manual-trigger-v*'
 
 
 jobs:
@@ -21,13 +24,13 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-
       - name: Build and push for k9s-with-gotty
         uses: docker/build-push-action@v2
         with:
           context: k9s-with-gotty/
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/k9s-with-gotty:latest
+        continue-on-error: true
 
       - name: Build and push for derper
         uses: docker/build-push-action@v2
@@ -36,15 +39,17 @@ jobs:
           context: derper/
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/derper:latest
+        continue-on-error: true
 
       - name: Build and push for dns-mobileconfig
         uses: docker/build-push-action@v2
         with:
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           context: dns-mobileconfig
           push: true
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/dns-mobileconfig:latest
+        continue-on-error: true
 
       # - name: Build and push for webproc:singlefile
       #   uses: docker/build-push-action@v2
@@ -59,6 +64,7 @@ jobs:
           context: subconverter/
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/subconverter:latest
+        continue-on-error: true
 
       - name: Build and push for fcct-online
         uses: docker/build-push-action@v2
@@ -66,6 +72,7 @@ jobs:
           context: fcct-online
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/fcct-online:latest
+        continue-on-error: true
 
       # 不好用！
       # - name: Build and push for hishtory
@@ -85,6 +92,7 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/registry-ui:latest
+        continue-on-error: true
 
       - name: Build and push for osfs
         uses: docker/build-push-action@v2
@@ -92,6 +100,7 @@ jobs:
           context: osfs
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/osfs:latest
+        continue-on-error: true
 
       - name: Build and push for php8
         uses: docker/build-push-action@v2
@@ -101,6 +110,7 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/nginx-php:8.1
+        continue-on-error: true
 
       # 谁还用 php7 啊
       # - name: Build and push for php7
